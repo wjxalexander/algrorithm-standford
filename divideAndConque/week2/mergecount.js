@@ -1,5 +1,4 @@
 // merge sort
-
 let count = 0
 function mergSort(arr) {
     const length = arr.length;

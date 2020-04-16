@@ -1,0 +1,12 @@
+>Let 0<α<.5 be some constant (independent of the input array length n). Recall the Partition subroutine employed by the QuickSort algorithm, as explained in lecture. What is the probability that, with a randomly chosen pivot element, the Partition subroutine produces a split in which the size of the smaller of the two subarrays is ≥α times the size of the original array?
+
+answer: 这个概率相当于是在[0,1]取一个值，不在[0,α]与[1-α,1]之间的概率。1-(α-0)-(1-(1-α))=1-2α
+
+>Now assume that you achieve the approximately balanced splits above in every recursive call --- that is, assume that whenever a recursive call is given an array of length kk, then each of its two recursive calls is passed a subarray with length between \alpha kαk and (1-\alpha)k(1−α)k (where \alphaα is a fixed constant strictly between 0 and .5.5). How many recursive calls can occur before you hit the base case? Equivalently, which levels of the recursion tree can contain leaves? Express your answer as a range of possible numbers dd, from the minimum to the maximum number of recursive calls that might be needed.
+
+answer:  a<0.5 时 a^x=1/n最先到底部，否则就是(1-a)^x=1/n最先到底部
+
+
+>Consider a group of kk people. Assume that each person's birthday is drawn uniformly at random from the 365 possibilities. (And ignore leap years.) What is the smallest value of kk such that the expected number of pairs of distinct people with the same birthday is at least one?[Hint: define an indicator random variable for each ordered pair of people. Use linearity of expectation.]
+
+answer: group的可能性为(k*(k-1))/2,每个人的生日概率为 1/365，E=pi*xi => (k*(k-1))/2 * 1/365 >=1; k>28

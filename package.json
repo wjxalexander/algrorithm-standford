@@ -1,0 +1,22 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wjxalexander/algrorithm-standford.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wjxalexander/algrorithm-standford/issues"
+  },
+  "homepage": "https://github.com/wjxalexander/algrorithm-standford#readme",
+  "dependencies": {
+    "ramda": "^0.27.0"
+  }
+}

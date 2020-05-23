@@ -49,8 +49,11 @@ class Graph {
 1. all distance= infinity
 2. add source to heap ,distance[source]  = 0
 3. find minium remove it from heap
-4. review all edges(vertex) , compare distance[vertex] distance[minium]+weight if(distance[vertex] > distance[minium]+weight) update heap, update distance
+4. review all edges(vertex) , compare distance[vertex] distance[minium]+weight if(distance[vertex] > distance[minium]+weight)
+   update heap, update distance
 5. while heap is not empty, repeat step 3 step5
+why suceess: 每个节点一旦被heap弹出就不再会被review，起到了X 作用， 
+由于EXTRACTMIN O(N)= logn 取代了之前数组O(N)寻找最小项 在HEAP中的元素正好是一半在X 一半在V-X
 */
 function dijkStra_with_heap(graph, source) {
     const graphMap = graph.adjList

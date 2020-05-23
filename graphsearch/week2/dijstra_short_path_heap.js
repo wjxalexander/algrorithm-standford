@@ -45,6 +45,13 @@ class Graph {
     };
 }
 
+/* 
+1. all distance= infinity
+2. add source to heap ,distance[source]  = 0
+3. find minium remove it from heap
+4. review all edges(vertex) , compare distance[vertex] distance[minium]+weight if(distance[vertex] > distance[minium]+weight) update heap, update distance
+5. while heap is not empty, repeat step 3 step5
+*/
 function dijkStra_with_heap(graph, source) {
     const graphMap = graph.adjList
     const X = new Set() // computed

@@ -46,7 +46,7 @@ class Graph {
 function dijkStraAlgorithm(graph, source) {
     const graphMap = graph.adjList
     const size = graph.adjList.size
-    const X = new Set()
+    const X = new Set() // computed
     const shortPath = new Map()
     X.add(source)
     shortPath.set(source, 0)
@@ -71,7 +71,7 @@ function dijkStraAlgorithm(graph, source) {
                 }
             });
         }
-        // find the miminum greedy score
+        // find the miminum greedy score 
         if (localMap.size > 0) {
             const { greedyKey, minVal } = getMinValue(localMap)
             X.add(greedyKey)

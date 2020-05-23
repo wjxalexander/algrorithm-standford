@@ -17,7 +17,8 @@ function minHeapfy(arr, length, i) {
         minHeapfy(arr, length, tempLargestPosition)
     }
 }
-// an arry to a MinHeap
+// an arry to a MinHeap o(n)ence, Heapify takes different time for each node, which is O(h). h=height of tree
+
 function buildArrToMinHeap(arr) {
     const copyArr = Array.from(arr)
     const length = copyArr.length
@@ -46,9 +47,12 @@ function minHeapInsertion(heap, target) {
 }
 
 function extractMin(heap) {
+    if(heap.length<=1){
+        return heap
+    }
     const copyHeap = [...heap]
     const min = copyHeap[0]
-    const newHeap = [copyHeap[copyHeap.length - 1], ...copyHeap.slice(1, copyHeap.length - 1)]
+    const newHeap = [copyHeap[copyHeap.length - 1], ...copyHeap.slice(1, copyHeap.length - 1)] // tail to head 
     const _help = (heap, length, i) => {
         let tempIndex = i;
         const leftChild = 2 * i + 1;
@@ -60,7 +64,7 @@ function extractMin(heap) {
             tempIndex = rightChild
         }
         if ((leftChild < length && rightChild < length) && (heap[leftChild] < heap[tempIndex] && heap[rightChild] < heap[tempIndex])) {
-            tempIndex = heap[leftChild] < heap[rightChild] ? leftChild : rightChild;
+            tempIndex = heap[leftChild] < heap[rightChild] ? leftChild : rightChild; // smaller than both sides? swap with the small side
         }
         if (tempIndex !== i) {
             const temp = heap[tempIndex]
@@ -76,9 +80,11 @@ const test = [1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17]
 const Heap = buildArrToMinHeap(test)
 const insert = minHeapInsertion(Heap, 11)
 const minHeap = extractMin(Heap)
+const test2 = []
+const heap2 = buildArrToMinHeap(test2)
 
 
-console.log("done")
+console.log(extractMin([]))
 
 module.exports = {
     minHeapfy,

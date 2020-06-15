@@ -76,19 +76,30 @@ function extractMin(heap) {
     _help(newHeap, newHeap.length, 0)
     return { min, newHeap }
 }
+
+function deleteNode(heap,node){
+    if(!heap.includes(node)){
+        return heap
+    }
+    const index = heap.indexOf(node)
+        const swapEle = heap[heap.length-1]
+    heap[index] = swapEle
+    heap.pop()
+    return buildArrToMinHeap(heap)
+}
 const test = [1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17]
 const Heap = buildArrToMinHeap(test)
 const insert = minHeapInsertion(Heap, 11)
 const minHeap = extractMin(Heap)
 const test2 = []
 const heap2 = buildArrToMinHeap(test2)
+const deleteHeap = deleteNode(Heap, 6)
 
-
-console.log(extractMin([]))
 
 module.exports = {
     minHeapfy,
     minHeapInsertion,
     extractMin,
-    buildArrToMinHeap
+    buildArrToMinHeap,
+    deleteNode
 }

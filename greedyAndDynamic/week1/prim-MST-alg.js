@@ -18,11 +18,21 @@ fs.readFile(`./greedyAndDynamic/week1/${fileName}.txt`, "utf-8", (err, data) => 
     adjListArray.forEach(({ vertex, target, cost }) => {
         graph.addEdge(parseInt(vertex), parseInt(target), parseInt(cost))
     })
-
+    const source = adjListArray[0].vertex
     console.log(graph)
     // dijkStra_with_heap(graph, 0)
     // excute(adjListArray);
 });
+
+function primMST(graph,source){
+    const adjList = graph.adjList
+    let heap = []
+    let T = []
+    const x = new Set()
+    x.add(source)
+    
+
+}
 class Graph {
     constructor(props) {
         this.adjList = new Map();

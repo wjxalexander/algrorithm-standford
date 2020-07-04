@@ -27,7 +27,7 @@ fs.readFile(
         });
         const source = adjListArray[0].vertex;
 
-        console.log(graph);
+        console.log(dayjs);
         primMSTWithHeap(graph, parseInt(source));
         // dijkStra_with_heap(graph, 0)
         // excute(adjListArray);

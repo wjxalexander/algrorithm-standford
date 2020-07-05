@@ -39,7 +39,8 @@ const R = require("ramda");
 const dayjs = require("dayjs");
 // const minHeapMethods = require("../../graphsearch/week3/minHeap")
 
-const fileName = "clustering_big";
+const fileName = "clustering_big"
+// "clustering_big";
 fs.readFile(
     `./greedyAndDynamic/week2/${fileName}.txt`,
     "utf-8",
@@ -64,62 +65,55 @@ fs.readFile(
     }
 );
 function max_k_clusters_for_three_spacing(arr, vertices, length) {
-    const hammingVertexHash = hammingDistanceHash(arr)
-    const union = Array.from({ length: vertices })
-    arr.forEach((item, index) => {
-        if (union[index] === undefined) {
-            union[index] = index;
-        }
-        const allHammingDistanceWithOne = getAllHammingDistanceWithOne(item)
-        const allHammingDistanceWithTwo = getAllHammingDistanceWithTwo(item)
-        const allHamming = [item, ...allHammingDistanceWithOne, ...allHammingDistanceWithTwo]
-
-        // 只需要union 小于三的部分 only need union distance small than 3
-        for (const item of allHamming) {
-            if (hammingVertexHash.has(item)) {
-                const verts = hammingVertexHash.get(item)
-                verts.forEach(item => {
-                    if (item !== index) {
-                        union[item] = union[index] // union it
-                    }
-                })
-            }
-        }
-    })
-
-    return new Set(union).size // get union with different 
-}
-
-function hammingDistanceHash(arr) {
-    const hammingHash = new Map()
-    arr.forEach((item, index) => {
-        hammingHash.has(item) ? hammingHash.get(item).push(index) : hammingHash.set(item, [index])
-    })
-    return hammingHash
-}
-
-function getAllHammingDistanceWithOne(item) {
-    const ret = new Set()
-    for (let i = 0; i < item.length; i++) {
-        const toModified = item.split("");
-        item[i] === "1" ? toModified[i] = "0" : toModified[i] = "1"
-        ret.add(toModified.join(""))
+    const hash = {}
+    for (const item of arr) {
+        hash[item] = item
     }
-    return ret;
-}
 
-function getAllHammingDistanceWithTwo(item) {
-    const ret = new Set()
-    for (let i = 0; i < item.length; i++) {
-        const toModified = item.split("");
-        item[i] === "1" ? toModified[i] = "0" : toModified[i] = "1"
-        for (let j = i + 1; j < toModified.length; j++) {
-            if (j !== i) {
-                const toModified_2 = [...toModified];
-                toModified[j] === "1" ? toModified_2[j] = "0" : toModified_2[j] = "1"
-                ret.add(toModified_2.join(""))
+    let clusters = vertices
+
+    for (const item of arr) {
+        let temp_head = hash[item]
+        while (hash[temp_head] !== temp_head) {
+            temp_head = hash[temp_head]
+        }
+        // lazy union
+        const allInvert = invert(item)
+        for (const item of allInvert) {
+            if (hash[item]) {
+                let head = hash[item]
+                while (hash[head] !== head) {
+                    head = hash[head]
+                }
+
+                if (temp_head !== head) {
+                    hash[head] = temp_head
+                    clusters--
+                }
             }
         }
     }
-    return ret;
+
+    return clusters
+}
+
+function invert(v) {
+    const originArr = v.split("")
+    const ret = []
+
+    for (let i = 0; i < v.length; i++) {
+        const tempArr = Array.from(originArr);
+        tempArr[i] = originArr[i] === "0" ? "1" : "0";
+
+        ret.push(tempArr.join(""))
+
+        for (j = i + 1; j < v.length; j++) {
+            tempArr2 = Array.from(tempArr)
+            tempArr2[j] = tempArr[j] === "0" ? "1" : "0"
+
+            ret.push(tempArr2.join(""))
+        }
+    }
+
+    return ret
 }

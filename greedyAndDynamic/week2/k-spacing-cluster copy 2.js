@@ -2,6 +2,7 @@
  * Since number of points is quite big, we cannot write out the graph with all the distances between all the points explicitly.
  *  It will be 200000∗199999/2=19999900000 edges, which is too much. We will use another approach instead.
  * What we need to do in this task is put two points in one cluster iff the distance between them is 1 or 2. Let’s call such points neighbors. 
+ * 找到所有距离为<3 的俩个点
  * How can we find all of the neighbors for a given point u? Let’s think of every point as 24-bit representation of some integer number. 
  * Then neighbors of u are such points that differ from u in no more than 2 bytes. 
  * It means that x is a neighbor of u iff xXORu is a number that has only 1 or 2 ones in the binary representation. 

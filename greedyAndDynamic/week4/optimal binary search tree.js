@@ -1,5 +1,6 @@
 /*
 这个算法好难啊~~~ ref: https://www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/
+
 */
 function optimalBST(tree, p) {
     const n = tree.length
@@ -32,6 +33,7 @@ function sum(arr) {
 
 }
 
-const test = [0.05, 0.4, 0.08, 0.04, 0.1, 0.1, 0.23]
-optimalBST(test)
+const test = [0.05, 0.4, 0.08, 0.04, 0.1, 0.1, 0.23]//2.18
+const test2 = [.2, .05, .17, .1, .2, .03, .25] //2.23
+optimalBST(test2)
 

@@ -1,26 +1,25 @@
+/*
+这个算法好难啊~~~ ref: https://www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/
+*/
 function optimalBST(tree, p) {
     const n = tree.length
+    const ret = Array.from({ length: n + 1 }, () => [])
 
-    const ret = Array.from({ length: n }, () => [])
-
-    const getMin = (i, s, A) => {
-        const temp = []
-        for (let r = i; r < i + s; r++) {
-            const temp1 = A[i][r - 1] ? A[i][r - 1] : 0
-            const temp2 = A[r + 1][i + s] ? A[r + 1][i + s] : 0
-
-            temp.push(temp1 + temp2)
-        }
-        return temp.length > 0 ? Math.min(...temp) : 0
-    }
     for (i = 0; i < n; i++) {
-        ret[i][i - 1] = 0
+        ret[i][i] = tree[i]
     }
 
-    for (let s = 0; s < n; s++) {
-        for (let i = 0; i < n - s; i++) {
-            const sumP = sum(tree.slice(i, i + s + 1))
-            ret[i][i + s] = sumP + getMin(i, s, ret)
+    for (let s = 2; s < n + 1; s++) {
+        for (let i = 0; i <= n - s + 1; i++) {
+            const j = i + s - 1;
+            ret[i][j] = Number.MAX_SAFE_INTEGER
+            for (let r = i; r <= j; r++) {
+                const left = r > i ? ret[i][r - 1] : 0
+                const right = r < j ? ret[r + 1][j] : 0
+                const temp = left + right + sum(tree.slice(i, j + 1))
+                if (ret[i][j] > temp) ret[i][j] = temp
+            }
+
         }
     }
 
@@ -32,9 +31,7 @@ function sum(arr) {
     return arr.reduce((pre, cur) => pre + cur, 0)
 
 }
-const p = {
-    1: 0.05, 2: 0.4, 3: 0.08, 4: 0.04, 5: 0.1, 6: 0.1, 7: 0.23
-}
-const test = [.05, .4, .08, .04, .1, .1, .23]
-optimalBST(test, p)
+
+const test = [0.05, 0.4, 0.08, 0.04, 0.1, 0.1, 0.23]
+optimalBST(test)
 
